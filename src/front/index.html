@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <title>
+        Form
+    </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: #fec107;
+            padding: 0 10px;
+        }
+
+        .form {
+            height: 400;
+            width: 100%;
+            text-align: center;
+        }
+
+        .wrapper {
+            max-width: 500px;
+            width: 100%;
+            background: #fff;
+            margin: 50px auto;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.125);
+            padding: 30px;
+        }
+
+        .wrapper .form .req {
+            margin: 10px;
+            align-items: center;
+        }
+
+        .wrapper .form #id {
+            padding: 5px;
+            margin-top: 20px;
+            align-items: center;
+        }
+
+        .wrapper .form #data-protection {
+            margin-top: 10px;
+            font-size: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='wrapper'>
+        <div class='title'>// hz
+        </div>
+        <form class='form' name='form' method='post' action='http://159.69.216.58/form_post'>
+            <h4 class='name'>T-shirt size*</h4>
+            <input class='req' list='browser' onkeydown='enableSubmit()'>
+            <datalist id='browser'>
+                <option disabled selected='selected'>
+                    --Choose Option </option>
+                <option value='S'></option>
+                <option value='M'></option>
+                <option value='L'></option>
+                <option value='XL'></option>
+            </datalist>
+
+            <h4 class='mail'>Mail*</h4>
+            <input class='req' type='email' name='mail' placeholder='E-mail' onfocusout='validateEmail()'
+            onkeydown='enableSubmit()'>
+
+            <h4 class='address'> Address*</h4>
+            <input class='req' type='text' name='address' placeholder='Address' onkeydown='enableSubmit()'>
+            <div>
+                <input type='checkbox' id='data-protection' unchecked onkeydown='enableSubmit()'>
+
+                <label for='data-protection' style='font-size: 12px'> I have read and agree to the <a
+                        href='https://www.sva.de/de/datenschutz'>
+                        Data
+                        Privacy
+                        Policy</a></label>
+            </div>
+
+            <input id='id' type='submit' value='Submit' onclick='validateForm()' disabled>
+        </form>
+
+
+        <script>
+
+            function enableSubmit() {
+                let inputs = document.getElementsByClassName('req');
+                let btn = document.querySelector('input[type="submit"]');
+
+                submitBt()
+
+                for (var i = 0; i < inputs.length; i++) {
+                    let changedInput = inputs[i];
+                    if (changedInput.value == '') {
+                        document.forms['form']['id'].setAttribute('disabled', 'disabled')
+                        return;
+                    }
+                }
+            }
+            function validateForm() {
+                let y = document.forms['form']['mail'].value;
+            }
+
+            function validateEmail() {
+                var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+                if (document.forms['form']['mail'].value.match(validRegex)) {
+
+                    return true;
+
+                } else {
+
+                    alert('Invalid email address!');
+
+                    document.forms['form']['id'].setAttribute('disabled', 'disabled')
+
+                    return false;
+
+                }
+
+            }
+            function tickPrivacyPolicyCheckbox() {
+                document.forms['form']['data-protection'].checked == true ? document.forms['form']['data-protection'].checked = true :
+                    document.forms['form']['data-protection'].checked = false;
+
+                submitBt();
+            }
+
+            function submitBt() {
+                let submitBtn = document.forms['form']['id'];
+
+                if (document.forms['form']['data-protection'].checked) {
+                    submitBtn.removeAttribute('disabled')
+                } else {
+                    submitBtn.setAttribute('disabled', 'disabled')
+                }
+            }
+
+        </script>
+</body>

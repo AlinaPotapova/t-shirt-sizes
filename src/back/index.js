@@ -1,22 +1,24 @@
-const https = require("http");
+const https = require("https");
 const fs = require("fs");
 const path = require("path");
-
-
 const express = require("express");
-const { runInNewContext } = require("vm");
-
-
 const app = express();
 
+const options = {
+    key: fs.readFileSync(path.join(__dirname, "keys", "key.pem")),
+    cert: fs.readFileSync(path.join(__dirname, "keys", "cert.pem"))
+};
+
 https
-    .createServer(app)
+    .createServer(options, app)
     .listen(4000, () => {
         console.log('server is runing at port 4000')
     });
+
+
 app.get('/', (req, res) => {
     console.log(req);
-    res.sendFile(path.join(__dirname, "project.html"));
+    res.sendFile(path.join(__dirname, "front", "index.html"));
 })
 
 app.post('/action-page', (req, res) => {
