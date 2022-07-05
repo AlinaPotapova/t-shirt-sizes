@@ -9,6 +9,8 @@ const options = {
     cert: fs.readFileSync(path.join(__dirname, "keys", "cert.pem"))
 };
 
+app.use(express.static(path.join(__dirname, "../", "front")));
+
 https
     .createServer(options, app)
     .listen(4000, () => {
@@ -18,7 +20,7 @@ https
 
 app.get('/', (req, res) => {
     console.log(req);
-    res.sendFile(path.join(__dirname, "front", "index.html"));
+    res.sendFile(path.join(__dirname, '../', "front", "index.html"));
 })
 
 app.post('/action-page', (req, res) => {
@@ -33,6 +35,6 @@ app.post('/action-page', (req, res) => {
         if (err) console.log(err);
         else console.log("Data saved");
     });
-    res.redirect(303, 'thank-you');
+    res.redirect(200, 'thank-you');
 
 })

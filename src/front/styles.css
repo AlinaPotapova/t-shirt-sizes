@@ -1,0 +1,42 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: #fec107;
+    padding: 0 10px;
+}
+
+.form {
+    height: 400;
+    width: 100%;
+    text-align: center;
+}
+
+.wrapper {
+    max-width: 500px;
+    width: 100%;
+    background: #fff;
+    margin: 50px auto;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.125);
+    padding: 30px;
+}
+
+.wrapper .form .req {
+    margin: 10px;
+    align-items: center;
+}
+
+.wrapper .form #id {
+    padding: 5px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.wrapper .form #data-protection {
+    margin-top: 10px;
+    font-size: 10px;
+}
