@@ -1,0 +1,24 @@
+{
+  "name": "tshirts",
+  "version": "0.0.1",
+  "description": "Project for presenting T-shirts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlinaPotapova/t-shirt-sizes.git"
+  },
+  "author": "Alina Potapova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlinaPotapova/t-shirt-sizes/issues"
+  },
+  "homepage": "https://github.com/AlinaPotapova/t-shirt-sizes#readme",
+  "dependencies": {
+    "csv": "^6.1.5",
+    "express": "^4.18.1",
+    "log": "^6.3.1"
+  }
+}
