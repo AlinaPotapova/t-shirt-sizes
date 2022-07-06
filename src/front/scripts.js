@@ -51,3 +51,15 @@ function submitBt() {
         submitBtn.setAttribute('disabled', 'disabled')
     }
 }
+
+function run_handler() {
+    const Http = new XMLHttpRequest();
+    const url = '/special';
+    Http.open("GET", url);
+    Http.send();
+
+    Http.onreadystatechange = (e) => {
+        console.log(e);
+        alert(Http.responseText);
+    }
+}

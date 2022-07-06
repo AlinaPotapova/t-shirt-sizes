@@ -23,6 +23,13 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../', "front", "index.html"));
 })
 
+app.get('/special', (req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    // grab data
+    // add to csv 
+    res.end('Success!');
+})
+
 app.post('/action-page', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
 
