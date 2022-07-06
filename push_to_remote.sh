@@ -3,5 +3,6 @@
 
 # run from dir which contains t-shirt-sizes
 rm t-shirt-sizes/src/back/node_modules
-zip t-shirt-sizes * 
-scp t-shirt-sizes.zip root@159.69.216.58:~   
+# zip project folder with all files inside (-r is recursive)
+zip build t-shirt-sizes/* -r 
+scp build.zip root@159.69.216.58:~   
