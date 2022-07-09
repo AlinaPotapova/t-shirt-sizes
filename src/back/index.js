@@ -6,8 +6,8 @@ const app = express();
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 const options = {
-    key: fs.readFileSync(path.join(__dirname, "keys", "key.pem")),
-    cert: fs.readFileSync(path.join(__dirname, "keys", "cert.pem"))
+    key: fs.readFileSync(path.join(__dirname, "../../../keys", "key.pem")),
+    cert: fs.readFileSync(path.join(__dirname, "../../../keys", "cert.pem"))
 };
 
 app.use(express.static(path.join(__dirname, "../", "front")));
