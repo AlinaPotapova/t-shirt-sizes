@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const app = express();
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 const options = {
     key: fs.readFileSync(path.join(__dirname, "keys", "key.pem")),
@@ -10,6 +11,7 @@ const options = {
 };
 
 app.use(express.static(path.join(__dirname, "../", "front")));
+app.use(express.json());
 
 https
     .createServer(options, app)
@@ -23,25 +25,22 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../', "front", "index.html"));
 })
 
-app.get('/special', (req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    // grab data
-    // add to csv 
-    res.end('Success!');
-})
 
-app.post('/action-page', (req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-
-
-    app.post('/form_post', (req, res) => {
-        const data = req.body;
-    })
-
-    fs.writeFile("data.csv", data, "utf-8", (err) => {
-        if (err) console.log(err);
-        else console.log("Data saved");
+app.post('/request', (req, res) => {
+    var filePath = path.join(__dirname, "../../data.csv");
+    const csv = createCsvWriter({
+        path: filePath,
+        header: [
+            { id: "size", title: "T-Shirt size" },
+            { id: "email", title: "E-mail" },
+            { id: "address", title: "Address" },
+        ],
+        append: fs.existsSync(filePath)
     });
-    res.redirect(200, 'thank-you');
+    csv.writeRecords([
+        req.body,
+    ]).then(() => { console.log("Done!"); });
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Success!');
 
 })

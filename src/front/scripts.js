@@ -1,65 +1,61 @@
+$(document).ready(function () {
 
-function enableSubmit() {
-    let inputs = document.getElementsByClassName('req');
-    let btn = document.querySelector('input[type="submit"]');
-
-    submitBt()
-
-    for (var i = 0; i < inputs.length; i++) {
-        let changedInput = inputs[i];
-        if (changedInput.value == '') {
-            document.forms['form']['id'].setAttribute('disabled', 'disabled')
-            return;
+    $("#send_form_button").click(function () {
+        if (validateForm()) { //если вернул true?
+            $.ajax({
+                url: '/request',
+                dataType: 'json',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({
+                    email: $('#mail').val(),
+                    size: $('#t-shirt-size').val(),
+                    address: $('#adress').val(),
+                }),
+                success: function (data, textStatus, jQxhr) {
+                    $('#response pre').html(data);
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
         }
+    });
+});
+
+function validateForm() {
+    var mail = $('#mail').val();
+    var size = $('#t-shirt-size').val();
+    var address = $('#adress').val();
+    if (mail == '' || size == '' || address == '') {
+        alert("All required filled should be filled out");
+        return false;
+    }
+    else if (result() == false) {
+        return false;
+    }
+    else {
+        return true;
     }
 }
-function validateForm() {
-    let y = document.forms['form']['mail'].value;
+
+function tick() {
+    var check = $("#data-protection").prop('checked')
+    if (check == true) {
+        $('#send_form_button').removeAttr('disabled');
+    }
+    else
+        $("#send_form_button").attr("disabled", "disabled");
 }
 
-function validateEmail() {
+var result = function validateEmail() {
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-    if (document.forms['form']['mail'].value.match(validRegex)) {
-
+    if ($('#mail').val().match(validRegex)) {
         return true;
 
     } else {
-
         alert('Invalid email address!');
-
-        document.forms['form']['id'].setAttribute('disabled', 'disabled')
-
         return false;
-
-    }
-
-}
-function tickPrivacyPolicyCheckbox() {
-    document.forms['form']['data-protection'].checked == true ? document.forms['form']['data-protection'].checked = true :
-        document.forms['form']['data-protection'].checked = false;
-
-    submitBt();
-}
-
-function submitBt() {
-    let submitBtn = document.forms['form']['id'];
-
-    if (document.forms['form']['data-protection'].checked) {
-        submitBtn.removeAttribute('disabled')
-    } else {
-        submitBtn.setAttribute('disabled', 'disabled')
     }
 }
 
-function run_handler() {
-    const Http = new XMLHttpRequest();
-    const url = '/special';
-    Http.open("GET", url);
-    Http.send();
-
-    Http.onreadystatechange = (e) => {
-        console.log(e);
-        alert(Http.responseText);
-    }
-}
