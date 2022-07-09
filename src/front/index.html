@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang='en'>
-
 <head>
     <title>
         Form
@@ -28,7 +27,7 @@
             <h4 class='address'> Address*</h4>
             <input type='text' id='adress' placeholder='Address'>
             <div>
-                <input type='checkbox' id='data-protection' unchecked onclick="tick()">
+                <input type='checkbox' id='data-protection' unchecked onclick="updateButton()">
 
                 <label for=' data-protection' style='font-size: 12px'> I have read and agree to
                     the <a href='https://www.sva.de/de/datenschutz'>
@@ -36,11 +35,10 @@
                         Privacy
                         Policy</a></label>
             </div>
-            <button  disabled id="send_form_button"> Button to click</button>
+            <button disabled id="send_form_button"> Button to click</button>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script type="text/javascript" src="scripts.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
 
 </body>

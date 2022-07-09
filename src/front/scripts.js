@@ -1,19 +1,20 @@
 $(document).ready(function () {
 
     $("#send_form_button").click(function () {
-        if (validateForm()) { //если вернул true?
+        var isValid = validateForm();
+        if (isValid) {
             $.ajax({
-                url: '/request',
+                url: '/submit',
                 dataType: 'json',
                 type: 'POST',
-                contentType: "application/json; charset=utf-8",
+                contentType: "application/json",
                 data: JSON.stringify({
                     email: $('#mail').val(),
                     size: $('#t-shirt-size').val(),
                     address: $('#adress').val(),
                 }),
                 success: function (data, textStatus, jQxhr) {
-                    $('#response pre').html(data);
+                    console.log('success');
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     console.log(errorThrown);
@@ -39,11 +40,9 @@ function validateForm() {
     }
 }
 
-function tick() {
-    var check = $("#data-protection").prop('checked')
-    if (check == true) {
+function updateButton() {
+    if ($("#data-protection").prop('checked'))
         $('#send_form_button').removeAttr('disabled');
-    }
     else
         $("#send_form_button").attr("disabled", "disabled");
 }

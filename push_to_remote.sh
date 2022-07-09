@@ -1,6 +1,4 @@
 #!/bin/sh
-
-
 # run from dir which contains t-shirt-sizes
 rm -r t_shirt_sizes/src/back/node_modules
 # zip project folder with all files inside (-r is recursive)

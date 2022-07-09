@@ -5,29 +5,28 @@ const express = require("express");
 const app = express();
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
-const options = {
-    key: fs.readFileSync(path.join(__dirname, "../../../keys", "key.pem")),
-    cert: fs.readFileSync(path.join(__dirname, "../../../keys", "cert.pem"))
-};
-
 app.use(express.static(path.join(__dirname, "../", "front")));
 app.use(express.json());
 
 https
-    .createServer(options, app)
-    .listen(4000, () => {
-        console.log('server is runing at port 4000')
+    .createServer(
+        {
+            key: fs.readFileSync(path.join(__dirname, "../../../keys", "key.pem")),
+            cert: fs.readFileSync(path.join(__dirname, "../../../keys", "cert.pem"))
+        },
+        app)
+    .listen(443, () => {
+        console.log('server is runing at port 443')
     });
 
 
 app.get('/', (req, res) => {
-    console.log(req);
     res.sendFile(path.join(__dirname, '../', "front", "index.html"));
 })
 
-
-app.post('/request', (req, res) => {
+app.post('/submit', (req, res) => {
     var filePath = path.join(__dirname, "../../data.csv");
+    var fileExist = fs.existsSync(filePath);
     const csv = createCsvWriter({
         path: filePath,
         header: [
@@ -35,12 +34,11 @@ app.post('/request', (req, res) => {
             { id: "email", title: "E-mail" },
             { id: "address", title: "Address" },
         ],
-        append: fs.existsSync(filePath)
+        append: fileExist
     });
     csv.writeRecords([
         req.body,
     ]).then(() => { console.log("Done!"); });
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Success!');
-
+    res.writeHead(200);
+    res.end('Success');
 })
