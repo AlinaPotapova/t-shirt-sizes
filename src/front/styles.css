@@ -10,10 +10,17 @@ body {
     padding: 0 10px;
 }
 
+.input {
+    width: 100%
+}
+
 .form {
-    height: 400;
     width: 100%;
-    text-align: center;
+}
+
+.form-item {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .wrapper {
@@ -39,4 +46,50 @@ body {
 .wrapper .form #data-protection {
     margin-top: 10px;
     font-size: 10px;
+}
+
+.error-message-atom {
+    float: right;
+    color: rgb(240, 0, 0);
+    font-size: 0.7em;
+}
+
+.input-header {
+    display: inline;
+}
+
+button {
+    float: right;
+    background: #fec107;
+    border: none;
+    color: #FFFFFF;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: #c9c0a2;
+}
+
+
+.button-holder {
+    margin-bottom: 40px;
+}
+
+#submit_result {
+    font-size: 0.8em;
+    margin-top: 15px;
+    display: block;
+    float: left;
+}
+
+.error-result {
+    color: rgb(240, 0, 0);
+}
+
+.success-result {
+    color: rgb(0, 240, 0);
 }

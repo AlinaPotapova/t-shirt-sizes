@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang='en'>
+
 <head>
     <title>
         Form
@@ -10,24 +11,39 @@
 <body>
     <div class='wrapper'>
         <div class='form' name='form'>
-            <h4 class='name'>T-shirt size*</h4>
-            <input list='browser' id='t-shirt-size'>
-            <datalist id='browser'>
-                <option disabled selected='selected'>
-                    --Choose Option </option>
-                <option value='S'></option>
-                <option value='M'></option>
-                <option value='L'></option>
-                <option value='XL'></option>
-            </datalist>
+            <div class="form-item">
+                <div>
+                    <p class='name'>T-shirt size*</p>
+                    <label id='size-error' class="error-message-atom"></label>
+                </div>
+                <input list='browser' id='t-shirt-size'>
+                <datalist id='browser'>
+                    <option disabled selected='selected'>
+                        --Choose Option </option>
+                    <option value='S'></option>
+                    <option value='M'></option>
+                    <option value='L'></option>
+                    <option value='XL'></option>
+                </datalist>
+            </div>
 
-            <h4 class='mail'>Mail*</h4>
-            <input type='email' id='mail' placeholder='E-mail'>
+            <div class="form-item">
+                <div>
+                    <p class='input-header'>Mail*</p>
+                    <label id='mail-error' class="error-message-atom"></label>
+                </div>
+                <input class="input" type='email' id='mail' placeholder='E-mail' display="block">
+            </div>
 
-            <h4 class='address'> Address*</h4>
-            <input type='text' id='adress' placeholder='Address'>
+            <div class="form-item">
+                <div>
+                    <p class='input-header'> Address*</p>
+                    <label id='address-error' class="error-message-atom"></label>
+                </div>
+                <input class="input" type='text' id='adress' placeholder='Address' display="block">
+            </div>
             <div>
-                <input type='checkbox' id='data-protection' unchecked onclick="updateButton()">
+                <input class='checkbox' type='checkbox' id='data-protection' unchecked onclick="updateButton()">
 
                 <label for=' data-protection' style='font-size: 12px'> I have read and agree to
                     the <a href='https://www.sva.de/de/datenschutz'>
@@ -35,7 +51,10 @@
                         Privacy
                         Policy</a></label>
             </div>
-            <button disabled id="send_form_button"> Button to click</button>
+            <div class="button-holder">
+                <label id="submit_result" ></label>
+                <button disabled id="send_form_button">Submit</button>
+            </div>
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

@@ -38,7 +38,7 @@ app.post('/submit', (req, res) => {
     });
     csv.writeRecords([
         req.body,
-    ]).then(() => { console.log("Done!"); });
-    res.writeHead(200);
-    res.end('Success');
+    ]);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ message: "success" }));
 })

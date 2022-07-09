@@ -14,10 +14,12 @@ $(document).ready(function () {
                     address: $('#adress').val(),
                 }),
                 success: function (data, textStatus, jQxhr) {
-                    console.log('success');
+                    $('#submit_result').removeClass("error-result success-result").addClass("success-result")
+                        .text('We received your request. Wait for the T-shirt!');
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
-                    console.log(errorThrown);
+                    $('#submit_result').removeClass("error-result success-result").addClass("error-result")
+                        .text('An error occured, please try again later.');
                 }
             });
         }
@@ -25,19 +27,33 @@ $(document).ready(function () {
 });
 
 function validateForm() {
-    var mail = $('#mail').val();
+    var isEmailValid = isValidEmail();
     var size = $('#t-shirt-size').val();
     var address = $('#adress').val();
-    if (mail == '' || size == '' || address == '') {
-        alert("All required filled should be filled out");
-        return false;
+    var result = true;
+
+    if (isEmailValid) {
+        $('#mail-error').text('');
+    } else {
+        $('#mail-error').text('E-mail address is not valid or empty');
+        result = false;
     }
-    else if (result() == false) {
-        return false;
+
+    if (address == '') {
+        $('#address-error').text('Address cannot be empty');
+        result = false;
+    } else {
+        $('#address-error').text('');
     }
-    else {
-        return true;
+
+    if (size == '') {
+        $('#size-error').text('Please select T-shirt size');
+        result = false;
+    } else {
+        $('#size-error').text('');
     }
+
+    return result;
 }
 
 function updateButton() {
@@ -47,14 +63,10 @@ function updateButton() {
         $("#send_form_button").attr("disabled", "disabled");
 }
 
-var result = function validateEmail() {
+function isValidEmail() {
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if ($('#mail').val().match(validRegex)) {
-        return true;
+    var matches = $('#mail').val().match(validRegex);
 
-    } else {
-        alert('Invalid email address!');
-        return false;
-    }
+    return matches != null && matches.length > 0;
 }
 
